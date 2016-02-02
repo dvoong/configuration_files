@@ -2,6 +2,11 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize) ;; You might already have this line
 
+;; auto-complete
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
+
 ;; web-mode
 (require 'web-mode)
 ;; (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -20,8 +25,21 @@
 (setq web-mode-style-padding 2)
 (setq web-mode-script-padding 2)
 ;; (setq web-mode-block-padding 0) ; For multi-line blocks
+(setq web-mode-ac-sources-alist
+      '(("javascript" . (ac-source-yasnippet
+			 ac-source-abbrev
+			 ac-source-dictionary
+			 ac-source-words-in-same-mode-buffers))
+	("html" . (ac-source-yasnippet
+		   ac-source-abbrev
+		   ac-source-dictionary
+		   ac-source-words-in-same-mode-buffers))
+	("css" . (ac-source-yasnippet
+		  ac-source-css-property
+		  ac-source-abbrev
+		  ac-source-dictionary
+		  ac-source-words-in-same-mode-buffers))))
 
 ;; jedi
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)        ; optional
-
